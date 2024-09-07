@@ -1,58 +1,93 @@
-<div class="page-header">
-    <div class="header-wrapper row m-0">
-        <form class="form-inline search-full col" action="#" method="get">
-            <div class="form-group w-100">
-                <div class="Typeahead Typeahead--twitterUsers">
-                    <div class="u-posRelative">
-                        <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Search Cuba .." name="q" title="" autofocus>
-                        <div class="spinner-border Typeahead-spinner" role="status"><span class="sr-only">Loading...</span></div><i class="close-search" data-feather="x"></i>
-                    </div>
-                    <div class="Typeahead-menu"></div>
-                </div>
+<header id="page-topbar">
+    <div class="navbar-header">
+        <div class="d-flex">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <a href="index.html" class="logo logo-dark">
+                                <span class="logo-sm">
+                                    <img src="{{ asset('assets/images/logo.svg') }}" alt="" height="22">
+                                </span>
+                    <span class="logo-lg">
+                                    <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="17">
+                                </span>
+                </a>
+                
+                <a href="index.html" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="{{ asset('assets/images/logo-light.svg') }}" alt="" height="22">
+                                </span>
+                    <span class="logo-lg">
+                                    <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="19">
+                                </span>
+                </a>
             </div>
-        </form>
-        <div class="header-logo-wrapper col-auto p-0">
-            <div class="logo-wrapper"><a href="{{ route('admin.dashboard') }}"><img class="img-fluid" src="../assets/images/logo/logo.png" alt=""></a></div>
-            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
+            
+            <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
+                <i class="fa fa-fw fa-bars"></i>
+            </button>
+            
+            <!-- App Search-->
+            <form class="app-search d-none d-lg-block">
+                <div class="position-relative">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="bx bx-search-alt"></span>
+                </div>
+            </form>
         </div>
-        <div class="left-header col horizontal-wrapper ps-0">
-            <ul class="horizontal-menu">
-            </ul>
-        </div>
-        <div class="nav-right col-8 pull-right right-header p-0">
-            <ul class="nav-menus">
-                
-                {{--<li> <span class="header-search"><i data-feather="search"></i></span></li>--}}
-                
-                <li>
-                    <div class="mode"><i class="fa fa-moon-o"></i></div>
-                </li>
-                <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
-                <li class="profile-nav onhover-dropdown p-0 me-0">
-                    <div class="media profile-media">
-                        <img class="b-r-10" style="width: 40px;" src="{{ Auth::user()->avatar_image_url }}" onerror="this.onerror=null;this.src='{{ asset('assets/images/dashboard/profile.jpg') }}';" alt="">
-                        <div class="media-body"><span>{{ Auth::user()->name }}</span>
-                            <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
+        
+        <div class="d-flex">
+            
+            <div class="dropdown d-inline-block d-lg-none ms-2">
+                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="mdi mdi-magnify"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                     aria-labelledby="page-header-search-dropdown">
+                    
+                    <form class="p-3">
+                        <div class="form-group m-0">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <ul class="profile-dropdown onhover-show-div">
-                        <li><a href="{{ route('admin.change.profile') }}"><i data-feather="user"></i><span>Profile </span></a></li>
-                        <li><a href="javascript:void(0);" onclick="event.preventDefault();document.getElementById('logoutForm').submit();"><i data-feather="log-in"> </i><span>Logout</span></a></li>
-                        <form method="post" action="{{ route('admin.logout') }}" id="logoutForm">
-                            @csrf
-                        </form>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <script class="result-template" type="text/x-handlebars-template">
-            <div class="ProfileCard u-cf">
-                <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
-                <div class="ProfileCard-details">
-                    <div class="ProfileCard-realName">Nice</div>
+                    </form>
                 </div>
             </div>
-        </script>
-        <script class="empty-template" type="text/x-handlebars-template"><div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>
+            
+            <div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item waves-effect"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img id="header-lang-img" src="{{ asset('assets/images/flags/in.png') }}" alt="Header Language" height="16">
+                </button>
+            </div>
+            
+            <div class="dropdown d-none d-lg-inline-block ms-1">
+                <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
+                    <i class="bx bx-fullscreen"></i>
+                </button>
+            </div>
+            
+            <div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded-circle header-profile-user" src="{{ Auth::user()->avatar_image_url }}" onerror="this.onerror=null;this.src='{{ asset('assets/images/users/user-dummy-img.jpg') }}';" alt="">
+                    <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{ Auth::user()->name }}</span>
+                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <!-- item-->
+                    <a class="dropdown-item" href="{{ route('admin.change.profile') }}"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Profile</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="javascript:void(0);" onclick="event.preventDefault();document.getElementById('logoutForm').submit();"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
+                    <form method="post" action="{{ route('admin.logout') }}" id="logoutForm">
+                        @csrf
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</header>

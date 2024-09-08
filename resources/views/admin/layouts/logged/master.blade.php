@@ -22,5 +22,31 @@
         </div>
     </div>
     @include('admin.layouts.logged.script')
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+            else
+            {
+                $('#blah').attr('src', '{{ asset('assets/images/users/user-dummy-img.jpg') }}');
+            }
+        }
+        setTimeout(function() {
+            var alert = document.getElementById('autoDismissAlert');
+            if (alert) {
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+                setTimeout(function() {
+                    alert.remove(); // Removes the alert from DOM after fade-out
+                }, 300); // Adjust this timing if needed
+            }
+        }, 2000);
+    </script>
 </body>
 </html>

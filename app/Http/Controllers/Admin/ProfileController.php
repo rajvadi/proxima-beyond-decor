@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function change_password()
-    {
-        return view('admin.profile.change_password');
-    }
-
     public function profile()
     {
         return view('admin.profile.profile');
@@ -37,7 +32,6 @@ class ProfileController extends Controller
                 Storage::delete('public/'.auth()->user()->avatar);
             }
             Admin::find(auth()->user()->id)->update(['avatar'=>$img]);
-
         }
 
         Admin::find(auth()->user()->id)->update($request->only('name','email'));
@@ -56,28 +50,5 @@ class ProfileController extends Controller
         Admin::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
         return redirect()->back()->with("success","Password changed successfully !");
-    }
-
-    public function setting(){
-        $setting = Setting::first();
-        return view('admin.setting',compact('setting'));
-    }
-
-    public function store_setting(Request $request){
-        $request->validate([
-            'admob_interstitial_id' => 'nullable',
-            /*'admob_native_id' => 'nullable',*/
-            'admob_banner_id' => 'nullable'
-        ]);
-
-        $setting = Setting::first();
-        if($setting){
-            $setting->forceFill($request->only('admob_interstitial_id','admob_banner_id'))->save();
-        }else{
-            $setting = Setting::create($request->all());
-        }
-
-        return redirect()->back()->with("success","Setting updated successfully !");
-
     }
 }

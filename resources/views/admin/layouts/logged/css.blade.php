@@ -6,4 +6,6 @@
 <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 <!-- App js -->
 <script src="{{ asset('assets/js/plugin.js') }}"></script>
+
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/sweetalert2.css')}}">
 @yield('css')

@@ -31,4 +31,9 @@ class Product extends Model
         return $this->hasManyThrough(AttributeValue::class, ProductAttribute::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
 }

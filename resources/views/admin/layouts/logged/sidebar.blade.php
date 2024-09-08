@@ -14,6 +14,17 @@
                     </a>
                 </li>
                 
+                <li class="{{ request()->is('admin/product') || request()->is('admin/product/*') ? 'mm-active' : '' }}">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect {{ request()->is('admin/product') || request()->is('admin/product/*') ? 'mm-active' : '' }}">
+                        <i class="bx bx-store"></i>
+                        <span key="t-ecommerce">Products</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="ecommerce-shops.html" key="t-shops">List</a></li>
+                        <li class="{{ request()->is('admin/product/create') || request()->is('admin/product/*/edit') ? 'mm-active' : '' }}"><a href="{{ route('admin.product.create') }}" key="t-add-product" class="{{ request()->is('admin/product/create') || request()->is('admin/product/*/edit') ? 'active' : '' }}">Add</a></li>
+                    </ul>
+                </li>
+                
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
                         <span class="badge rounded-pill bg-danger float-end" key="t-hot">Hot</span>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ProductController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::prefix('auth')->middleware('guest:admin')->group(function () {
@@ -19,5 +20,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::post('change-password', [ProfileController::class, 'update_password'])->name('update.password');
         Route::get('profile', [ProfileController::class, 'profile'])->name('change.profile');
         Route::post('update-profile', [ProfileController::class, 'update_profile'])->name('update.profile');
+
+        //product management
+        Route::resource('product', ProductController::class);
     });
 });

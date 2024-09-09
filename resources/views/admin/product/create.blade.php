@@ -130,6 +130,14 @@
                                     <option value="Perl" />
                                     <option value="Erlang" />
                                 </datalist>--}}
+                                
+                                @if ($attributes->count() > 0)
+                                    <datalist id="attributes">
+                                        @foreach($attributes as $attribute)
+                                            <option value="{{ $attribute->name }}" />
+                                        @endforeach
+                                    </datalist>
+                                @endif
                                 <div class="row">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table mb-0 table-striped mb-0" id="attributeTable">
@@ -137,7 +145,7 @@
                                             <tr id="attribute-head">
                                                 <th>Actions</th>
                                                 <th>
-                                                    <input type="text" name="attributes[0][name]" required class="form-control" placeholder="Default Attribute">
+                                                    <input type="text" list="attributes" name="attributes[0][name]" required class="form-control" placeholder="Default Attribute">
                                                 </th>
                                             </tr>
                                             </thead>
@@ -241,7 +249,7 @@
 
             // Add the new attribute column header with a delete button
             const newHeader = document.createElement('th');
-            newHeader.innerHTML = `<input type="text" required name="attributes[${attributeIndex}][name]" class="form-control" placeholder="Attribute Name" required>
+            newHeader.innerHTML = `<input type="text" list="attributes" required name="attributes[${attributeIndex}][name]" class="form-control" placeholder="Attribute Name" required>
                                    <button type="button" class="delete-attribute" style="margin-left: 50%;margin-top: 5px;" title="Delete Attribute" data-index="${attributeIndex}"><i class="fa fa-trash"></i></button>`;
             document.getElementById('attribute-head').appendChild(newHeader);
 

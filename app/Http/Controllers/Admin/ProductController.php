@@ -34,7 +34,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        $attributes = Attribute::all();
+        return view('admin.product.create', compact('attributes'));
     }
 
     /**
@@ -93,11 +94,11 @@ class ProductController extends Controller
                     'image' => $file
                 ]);
             }
+
+            return redirect()->route('admin.product.index')->with('success', 'Product created successfully');
+        } else {
+            return redirect()->route('admin.product.index')->with('error', 'Product creation failed');
         }
-
-
-
-
     }
 
     /**

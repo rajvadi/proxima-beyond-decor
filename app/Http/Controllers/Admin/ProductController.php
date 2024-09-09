@@ -8,7 +8,8 @@ use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\AttributeValue;
 use Illuminate\Http\Request;
-use Storage;
+use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
@@ -17,7 +18,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        if (request()->ajax()) {
+            return DataTables::of(Product::query())
+                ->addIndexColumn()
+                ->editColumn('image', function ($product) {
+                    return '<img src="'.$product->images->first()->image_url.'" width="100px" height="100px">';
+                })
+                ->rawColumns(['image'])->make(true);
+        }
+        return view('admin.product.index');
     }
 
     /**
@@ -77,8 +86,9 @@ class ProductController extends Controller
             foreach ($images as $index => $image) {
                 $image_parts = explode(";base64,", $image);
                 $image_base64 = base64_decode($image_parts[1]);
-                $file = 'product_images/'.$product_id.'/'.$index. time() . '.png';
-                $image = Storage::put($file, $image_base64, 'public');
+                $file = 'product/'.$product_id.'/'.$index. time() . '.png';
+                // store image in storage public folder
+                Storage::disk('public')->put($file, $image_base64);
                 $product->images()->create([
                     'image' => $file
                 ]);

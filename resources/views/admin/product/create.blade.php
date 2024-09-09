@@ -1,5 +1,5 @@
 @extends('admin.layouts.logged.master')
-@section('title', 'dashboard')
+@section('title', 'Create Product')
 
 @section('css')
     <link href="{{ asset('assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>

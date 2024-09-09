@@ -15,6 +15,17 @@ class ProductImage extends Model
         'title'
     ];
 
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute()
+    {
+        if ($this->image) {
+            return asset('storage/' . $this->image);
+        } else {
+            return '';
+        }
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);

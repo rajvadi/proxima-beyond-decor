@@ -95,6 +95,48 @@
             </div>
         </div>
     </div>
+    
+    <div class="modal fade" id="editproductinfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Product Basic Detail</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Show a second modal and hide this one with the button below.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="editproductattr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Product Attribute Detail</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Show a second modal and hide this one with the button below.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="editproductimg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Product Images</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Show a second modal and hide this one with the button below.
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -206,6 +248,18 @@
             table.on('click', '.view-link', function (e) {
                 product_view(this);
             });
+            
+            table.on('click', '.basic-info', function (e) {
+                product_basic_edit(this);
+            });
+
+            table.on('click', '.attribute-info', function (e) {
+                product_attr_edit(this);
+            });
+            
+            table.on('click', '.image-info', function (e) {
+                product_img_edit(this);
+            });
 
         });
 
@@ -217,8 +271,8 @@
                 dataType: 'json',
                 success: function (response) {
                     if(response.html){
-                        //$('#exampleModalLong').modal('show');
-                        $('.modal-body').html(response.html);
+                        // update #exampleModalLong .modal-body with response.html
+                        $('#exampleModalLong .modal-body').html(response.html);
                     }
                 },
                 error: function (error) {
@@ -229,10 +283,71 @@
             });
         }
 
+        function product_basic_edit(el)
+        {
+            $.ajax({
+                url: $(el).data('remote'),
+                type: 'get',
+                dataType: 'json',
+                success: function (response) {
+                    if(response.html){
+                        // update #editproductinfo .modal-body with response.html
+                        $('#editproductinfo .modal-body').html(response.html);
+                    }
+                },
+                error: function (error) {
+                    // close modal
+                    Swal.fire('Oops!', 'Something went wrongs', 'error');
+                    $('#editproductinfo').modal('hide');
+                }
+            });
+        }
+
+        function product_attr_edit(el)
+        {
+            $.ajax({
+                url: $(el).data('remote'),
+                type: 'get',
+                dataType: 'json',
+                success: function (response) {
+                    if(response.html){
+                        // update #editproductattr .modal-body with response.html
+                        $('#editproductattr .modal-body').html(response.html);
+                        
+                    }
+                },
+                error: function (error) {
+                    // close modal
+                    Swal.fire('Oops!', 'Something went wrongs', 'error');
+                    $('#editproductattr').modal('hide');
+                }
+            });
+        }
+
+        function product_img_edit(el)
+        {
+            $.ajax({
+                url: $(el).data('remote'),
+                type: 'get',
+                dataType: 'json',
+                success: function (response) {
+                    if(response.html){
+                        $('#editproductimg .modal-body').html(response.html);
+
+                    }
+                },
+                error: function (error) {
+                    // close modal
+                    Swal.fire('Oops!', 'Something went wrongs', 'error');
+                    $('#editproductimg').modal('hide');
+                }
+            });
+        }
+
         function product_delete(el, table) {
             Swal.fire({
                 title: "Are you sure?",
-                text: "Product account will be deleted!",
+                text: "Product will be deleted!",
                 icon: "warning",
                 showCancelButton: !0,
                 confirmButtonColor: "#3085d6",
@@ -262,5 +377,106 @@
                 }
             });
         }
+
+        $(document).on("submit", "#edit_product_form", function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            var formData = $(this).serialize(); // Serialize the form data
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    
+                    if (response.success) {
+                        // Handle success, close the modal, and show a success message
+                        $('#editproductinfo').modal('hide');
+                        Swal.fire('Success', 'Product updated successfully', 'success');
+                        $('#product-list').DataTable().ajax.reload(); // Optionally, refresh part of the page with updated data
+                        // Optionally, refresh part of the page with updated data
+                    } else {
+                        // Handle error
+                        // Show an error message
+                        Swal.fire('Oops!', 'Something went wrong', 'error');
+                    }
+                },
+                error: function(xhr) {
+                    // Handle error
+                    // Show an error message
+                    Swal.fire('Oops!', 'Something went wrong', 'error');
+                }
+            });
+        });
+
+        $(document).on("submit", "#edit_product_attr", function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            var formData = $(this).serialize(); // Serialize the form data
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    
+                    if (response.success) {
+                        // Handle success, close the modal, and show a success message
+                        $('#editproductattr').modal('hide');
+                        Swal.fire('Success', 'Product attribute updated successfully', 'success');
+                        // Optionally, refresh part of the page with updated data
+                    } else {
+                        // Handle error
+                        // Show an error message
+                        Swal.fire('Oops!', 'Something went wrong', 'error');
+                    }
+                },
+                error: function(xhr) {
+                    // Handle error
+                    // Show an error message
+                    Swal.fire('Oops!', 'Something went wrong', 'error');
+                }
+            });
+        });
+
+        $(document).on("submit", "#edit_product_img", function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            document.querySelectorAll('input[name^="product_images"]').forEach(input => input.remove());
+            dropzone.getAcceptedFiles().forEach((file, index) => {
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = `product_images[${index}]`; // Unique name for each file
+                hiddenInput.value = file.dataURL; // Use file.name or file.path if available
+                document.getElementById('edit_product_img').appendChild(hiddenInput);
+            });
+
+            var formData = $(this).serialize(); // Serialize the form data
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: "POST",
+                data: formData,
+                success: function(response) {
+
+                    if (response.success) {
+                        // Handle success, close the modal, and show a success message
+                        $('#editproductimg').modal('hide');
+                        Swal.fire('Success', 'Product images updated successfully', 'success');
+                        // Optionally, refresh part of the page with updated data
+                    } else {
+                        // Handle error
+                        // Show an error message
+                        Swal.fire('Oops!', 'Something went wrong', 'error');
+                    }
+                },
+                error: function(xhr) {
+                    // Handle error
+                    // Show an error message
+                    Swal.fire('Oops!', 'Something went wrong', 'error');
+                }
+            });
+        });
+    
     </script>
 @endsection

@@ -22,6 +22,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::post('update-profile', [ProfileController::class, 'update_profile'])->name('update.profile');
 
         //product management
+        Route::match(['get', 'post'],'product/attribute/{product}', [ProductController::class, 'getAttribute'])->name('product.attribute');
+        Route::match(['get', 'post'],'product/image/{product}', [ProductController::class, 'getImage'])->name('product.image');
         Route::resource('product', ProductController::class);
     });
 });

@@ -76,7 +76,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="mb-3">
+                                            <label for="material">Category</label>
+                                            <select id="category" name="category_id" class="form-control @error('category_id') is-invalid @enderror">
+                                                <option value="">Select Category</option>
+                                                @foreach($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('category_id')
+                                                <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="mb-3">
@@ -90,7 +107,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                {{--<div class="row">
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label for="finishes">Finishes</label>
@@ -102,7 +119,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
+                                </div>--}}
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="mb-3">
@@ -118,18 +135,6 @@
                                 
                                 <h4 class="card-title">Product Attributes</h4>
                                 <p class="card-title-desc">Fill all information below</p>
-                                {{--<input type="search" class="form-control" list="languages" placeholder="Pick a programming language..">
-                                
-                                <datalist id="languages">
-                                    <option value="PHP" />
-                                    <option value="C++" />
-                                    <option value="Java" />
-                                    <option value="Ruby" />
-                                    <option value="Python" />
-                                    <option value="Go" />
-                                    <option value="Perl" />
-                                    <option value="Erlang" />
-                                </datalist>--}}
                                 
                                 @if ($attributes->count() > 0)
                                     <datalist id="attributes">
@@ -154,6 +159,8 @@
                                                 <td><button type="button" title="Delete Value" class="delete-row" style="color: #d17981;cursor: no-drop;" disabled><i class="fa fa-trash"></i></button></td>
                                                 <td>
                                                     <input type="text" name="values[0][0]" required class="form-control" placeholder="Value">
+                                                    <p style="margin-left: 50%;
+    margin-top: 10px;">Available : <input type="checkbox" name="availables[0][0]"  value="1" checked></p>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -161,6 +168,16 @@
                                         <div class="mt-3 text-center">
                                             <button type="button" id="add-attribute" class="btn btn-primary">Add Attribute</button>
                                             <button type="button" id="add-value" class="btn btn-secondary">Add Value Row</button>
+                                            <div class="mt-3">
+                                                <input class="form-check-input" type="radio" name="price_per" id="price_per1" value="piece" checked="">
+                                                <label class="form-check-label me-2" for="price_per1">
+                                                    Price Per Piece
+                                                </label>
+                                                <input class="form-check-input" type="radio" name="price_per" value="set" id="price_per2">
+                                                <label class="form-check-label" for="price_per2">
+                                                    Price Per Set
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -169,7 +186,6 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title mb-3">Product Images</h4>
-                                
                                 <div class="dropzone">
                                     <div class="fallback">
                                         <input name="file" type="file" multiple="multiple" accept="image/png, image/gif, image/jpeg">
@@ -258,7 +274,8 @@
             rows.forEach(row => {
                 const newValueCell = document.createElement('td');
                 newValueCell.setAttribute('data-attr-index', attributeIndex); // Track attribute index for deletion
-                newValueCell.innerHTML = `<input type="text" required name="values[${row.getAttribute('data-value-index')}][${attributeIndex}]" class="form-control" placeholder="Value">`;
+                newValueCell.innerHTML = `<input type="text" required name="values[${row.getAttribute('data-value-index')}][${attributeIndex}]" class="form-control" placeholder="Value"><p style="margin-left: 50%;
+    margin-top: 10px;">Available : <input type="checkbox" name="availables[${row.getAttribute('data-value-index')}][${attributeIndex}]" checked value="1"></p>`;
                 row.appendChild(newValueCell);
             });
 
@@ -280,7 +297,9 @@
             for (let i = 0; i <= attributeIndex; i++) {
                 const newValueCell = document.createElement('td');
                 newValueCell.setAttribute('data-attr-index', i); // Track attribute index for deletion
-                newValueCell.innerHTML = `<input type="text" required name="values[${valueIndex}][${i}]" class="form-control" placeholder="Value">`;
+                newValueCell.innerHTML = `<input type="text" required name="values[${valueIndex}][${i}]" class="form-control" placeholder="Value">
+                                           <p style="margin-left: 50%;
+    margin-top: 10px;">Available : <input type="checkbox" name="availables[${valueIndex}][${i}]" checked value="1"></p>`;
                 newRow.appendChild(newValueCell);
             }
 

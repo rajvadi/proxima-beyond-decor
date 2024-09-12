@@ -44,15 +44,30 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="mb-3">
+                                        <label for="material">Category</label>
+                                        <select id="category" name="category_id" class="form-control">
+                                            <option value="">All Category</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <table id="product-list" class="table table-bordered dt-responsive nowrap w-100">
                                 <thead>
                                 <tr>
                                     <th>Sr No.</th>
                                     <th>Image</th>
+                                    <th>Category</th>
                                     <th>Product Code</th>
                                     <th>Product Name</th>
                                     <th>Material</th>
-                                    <th>Finishes</th>
+                                    <th>Action</th>
+                                    {{--<th>Finishes</th>--}}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -62,8 +77,23 @@
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->
-        
         </div> <!-- container-fluid -->
+    </div>
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Product Detail</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Show a second modal and hide this one with the button below.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -91,6 +121,11 @@
     <script>
         $(document).ready(function () {
             let table = $('#product-list');
+            
+            // onchange of category
+            $('#category').on('change', function () {
+                table.DataTable().ajax.reload();
+            });
 
             let datatable = table.DataTable({
                 dom: 'Bfrtip',
@@ -99,6 +134,32 @@
                 responsive: true,
                 processing: true,
                 serverSide: true,
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        text: 'Export PDF',
+                        exportOptions: {
+                            // Specify the columns to include (use column index or column names)
+                            columns: [0, 2, 3, 4, 5] // Replace with the columns you want to include in the export
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Export Excel',
+                        exportOptions: {
+                            // Specify the columns to include (use column index or column names)
+                            columns: [0, 2, 3, 4, 5] // Replace with the columns you want to include in the export
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Print',
+                        exportOptions: {
+                            // Specify the columns to include (use column index or column names)
+                            columns: [0, 2, 3, 4, 5] // Replace with the columns you want to include in the export
+                        }
+                    }
+                ],
                 "bStateSave": true,
                 "fnStateSave": function (oSettings, oData) {
                     localStorage.setItem('offersDataTables', JSON.stringify(oData));
@@ -115,15 +176,20 @@
                     type: 'get',
                     headers: {
                         'X-CSRF-TOKEN': '{{csrf_token()}}'
+                    },
+                    data: function (d) {
+                        d.category_id = $('#category').val();
                     }
                 },
                 columns: [
                     {data: 'DT_RowIndex', name: 'id'},
                     {data: 'image', name: 'image', orderable: false, searchable: false},
+                    {data: 'category', name: 'category'},
                     {data: 'code', name: 'code'},
                     {data: 'name', name: 'name'},
                     {data: 'material', name: 'material'},
-                    {data: 'finishes', name: 'finishes'},
+                    {data: 'actions', name: 'actions', orderable: false, searchable: false},
+                    /*{data: 'finishes', name: 'finishes'},*/
                 ]
             });
 
@@ -134,13 +200,67 @@
 
             // category delete
             table.on('click', '.delete-link', function (e) {
-                category_delete_account(this, datatable);
+                product_delete(this, datatable);
             });
 
             table.on('click', '.view-link', function (e) {
-                news_view(this);
+                product_view(this);
             });
 
         });
+
+        function product_view(el)
+        {
+            $.ajax({
+                url: $(el).data('remote'),
+                type: 'get',
+                dataType: 'json',
+                success: function (response) {
+                    if(response.html){
+                        //$('#exampleModalLong').modal('show');
+                        $('.modal-body').html(response.html);
+                    }
+                },
+                error: function (error) {
+                    // close modal
+                    Swal.fire('Oops!', 'Something went wrongs', 'error');
+                    $('#exampleModalLong').modal('hide');
+                }
+            });
+        }
+
+        function product_delete(el, table) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Product account will be deleted!",
+                icon: "warning",
+                showCancelButton: !0,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Delete it!"
+            }).then(t => {
+                if (t.value) {
+                    $.ajax({
+                        url: $(el).data('remote'),
+                        type: 'delete',
+                        data: {_token: '{{csrf_token()}}', _method: 'delete'},
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire('Success', response.data, 'success');
+                                table.draw();
+                            } else if (!response.success) {
+                                Swal.fire('Oops!', response.message, 'error');
+                            } else {
+                                Swal.fire('Oops!', 'Something went wrong', 'error');
+                            }
+                        },
+                        error: function (error) {
+                            Swal.fire('Oops!', 'Something went wrong', 'error');
+                        }
+                    });
+                }
+            });
+        }
     </script>
 @endsection

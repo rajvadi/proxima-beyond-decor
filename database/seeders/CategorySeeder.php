@@ -13,9 +13,12 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::create([
-            'name' => 'Hardware',
-            'slug' => 'hardware'
-        ]);
+        // categories : Hardware,laminate, veneer, louvers & decorative sheets, modular kitchen, sofa curtain
+        Category::firstOrCreate(['name' => 'Hardware', 'slug' => 'hardware']);
+        Category::firstOrCreate(['name' => 'Laminate', 'slug' => 'laminate']);
+        Category::firstOrCreate(['name' => 'Veneer', 'slug' => 'veneer']);
+        Category::firstOrCreate(['name' => 'Louvers & Decorative Sheets', 'slug' => 'louvers-decorative-sheets']);
+        Category::firstOrCreate(['name' => 'Modular Kitchen', 'slug' => 'modular-kitchen']);
+        Category::firstOrCreate(['name' => 'Sofa Curtain', 'slug' => 'sofa-curtain']);
     }
 }

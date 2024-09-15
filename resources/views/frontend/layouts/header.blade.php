@@ -10,11 +10,11 @@
                     </a>
                     <form class="cr-search" action="{{ route('search') }}">
                         @csrf
-                        <input class="search-input" name="pcode" type="text" placeholder="Search For products...">
+                        <input class="search-input" value="{{ isset(request()->pcode) ? request()->pcode : ''  }}" name="pcode" type="text" placeholder="Search For products...">
                         <select class="form-select" name="cid" aria-label="Default select example">
                             <option value="" selected>All Categories</option>
                             @foreach(\App\Models\Category::all() as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" {{ isset(request()->cid) && request()->cid == $category->id ? 'selected' : ''  }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                         <button href="javascript:void(0)" class="search-btn">

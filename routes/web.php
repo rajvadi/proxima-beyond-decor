@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+//route for php artisan storage:link command
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+    return 'storage link created';
+});
+

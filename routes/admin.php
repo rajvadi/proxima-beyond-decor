@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         //product management
         Route::match(['get', 'post'],'product/attribute/{product}', [ProductController::class, 'getAttribute'])->name('product.attribute');
         Route::match(['get', 'post'],'product/image/{product}', [ProductController::class, 'getImage'])->name('product.image');
+        Route::get('print/A4/{product}', [ProductController::class, 'printA4'])->name('product.printA4');
         Route::resource('product', ProductController::class);
     });
 });

@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\AttributeValue;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
@@ -40,6 +41,7 @@ class ProductController extends Controller
                     return
                         ' 
                                 <a title="View Product" style="font-size:22px;" href="#" data-bs-toggle="modal" data-bs-target="#exampleModalLong" class="view-link" data-remote="' . route('admin.product.show', ['product' => $product->id]) . '"><i class="fa fa-eye"></i></a>&nbsp;&nbsp;
+                                <a title="Print Product" target="_blank" style="font-size:22px;" href="'. route('admin.product.printA4',['product' => $product->id]).'" class="print-link"><i class="fas fa-print"></i></a>&nbsp;&nbsp;
                                  <a href="javascrip:void(0);" class="basic-info" title="Edit Product Info" data-bs-toggle="modal" data-bs-target="#editproductinfo" style="font-size:22px;" data-remote="' . route('admin.product.edit', ['product' => $product->id]) . '"><i class="fas fa-file-signature"></i></a>&nbsp;&nbsp;
                                  <a href="javascrip:void(0);" class="attribute-info" title="Edit Product Attribute" data-bs-toggle="modal" data-bs-target="#editproductattr" style="font-size:22px;" data-remote="' . route('admin.product.attribute', ['product' => $product->id]) . '"><i class="far fa-money-bill-alt"></i></a>&nbsp;&nbsp;
                                  <a href="javascrip:void(0);" class="image-info" title="Edit Product Image" data-bs-toggle="modal" data-bs-target="#editproductimg" style="font-size:22px;" data-remote="' . route('admin.product.image', ['product' => $product->id]) . '"><i class="fas fa-images"></i></a>&nbsp;&nbsp;
@@ -267,5 +269,14 @@ class ProductController extends Controller
         }
         $html = view('admin.product.image',compact('product'))->render();
         return response()->json(['success' => true,'html'=>$html]);
+    }
+
+    public function printA4(Product $product)
+    {
+        $data = ['title' => 'A4 Size product page','product' => $product]; // Pass any data to your view
+        $pdf = PDF::loadView('admin.product.print', $data)
+            ->setPaper('a4', 'portrait'); // Set the paper size to A4 and orientation to portrait
+
+        return $pdf->stream('document.pdf'); // Stream the PDF in the browser
     }
 }

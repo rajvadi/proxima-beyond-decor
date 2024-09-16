@@ -17,6 +17,7 @@ class Product extends Model
         'material',
         'finishes',
         'price_per',
+        'MRP',
         'status'
     ];
 

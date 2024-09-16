@@ -62,6 +62,10 @@
                                     <label>Rate Per
                                         <span>:</span>
                                     </label>{{ ucwords($product->price_per) }}</li>
+                                <li>
+                                    <label>MRP
+                                        <span>:</span>
+                                    </label>{{ $product->MRP != '' ? $product->MRP : '-' }}</li>
                             </ul>
                         </div>
                     </div>

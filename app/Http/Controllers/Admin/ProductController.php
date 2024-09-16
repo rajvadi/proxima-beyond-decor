@@ -73,6 +73,7 @@ class ProductController extends Controller
             'description' => 'nullable',
             'material' => 'nullable',
             'price_per' => 'required|in:piece,set',
+            'MRP' => 'nullable',
             'product_images' => 'array',
             'product_images.*' => 'string',
         ]);
@@ -84,6 +85,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->material = $request->material;
         $product->price_per = $request->price_per;
+        $product->MRP = $request->MRP;
         if ($product->save()) {
             $product_id = $product->id;
             $attributes = $request->get('attributes');
@@ -170,6 +172,7 @@ class ProductController extends Controller
         $product->code = $request->code;
         $product->description = $request->description;
         $product->material = $request->material;
+        $product->MRP = $request->MRP;
         if ($product->save()) {
             return response()->json(['success' => true,'message'=>'Product updated successfully']);
         } else {

@@ -55,7 +55,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <label for="code">Product Code</label>
+                                            <label for="code">Product Code </label>
                                             <input id="code" name="code" required type="text" class="form-control @error('code') is-invalid @enderror" placeholder="Product Code">
                                             @error('code')
                                                 <span class="invalid-feedback" role="alert">
@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label for="material">Category</label>
                                             <select id="category" name="category_id" class="form-control @error('category_id') is-invalid @enderror">
@@ -88,6 +88,17 @@
                                             </select>
                                             @error('category_id')
                                                 <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <label for="name">MRP</label>
+                                            <input id="name" name="MRP" type="text" class="form-control @error('MRP') is-invalid @enderror" placeholder="0.68">
+                                            @error('MRP')
+                                            <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror

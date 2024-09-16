@@ -42,6 +42,7 @@
                                     <a href="javascript: void(0);" class="text-primary">{{ $product->category->name }}</a>
                                     <h4 class="mt-1 mb-3">{{ $product->name }} ({{ $product->code }})</h4>
                                     <h5 class="mb-4">Materials : <b>{{ $product->material != '' ? $product->material : '-' }}</b></h5>
+                                    <h5 class="mb-4">MRP : <b>{{ $product->MRP != '' ? $product->MRP : '-' }}</b></h5>
                                     {!! $product->description !!}
                                 </div>
                             </div>

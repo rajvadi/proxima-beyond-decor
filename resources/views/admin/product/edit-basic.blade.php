@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="material">Category</label>
                                 <select id="category" name="category_id" class="form-control @error('category_id') is-invalid @enderror">
@@ -40,6 +40,17 @@
                                     @endforeach
                                 </select>
                                 @error('category_id')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="name">MRP</label>
+                                <input id="MRP" value="{{ $product->MRP }}" name="MRP" type="text" required class="form-control @error('MRP') is-invalid @enderror" placeholder="0.68">
+                                @error('MRP')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                 </span>

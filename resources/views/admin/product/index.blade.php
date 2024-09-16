@@ -66,6 +66,7 @@
                                     <th>Product Code</th>
                                     <th>Product Name</th>
                                     <th>Material</th>
+                                    <th>MRP</th>
                                     <th>Action</th>
                                     {{--<th>Finishes</th>--}}
                                 </tr>
@@ -182,7 +183,7 @@
                         text: 'Export PDF',
                         exportOptions: {
                             // Specify the columns to include (use column index or column names)
-                            columns: [0, 2, 3, 4, 5] // Replace with the columns you want to include in the export
+                            columns: [0, 2, 3, 4, 5, 6] // Replace with the columns you want to include in the export
                         }
                     },
                     {
@@ -190,7 +191,7 @@
                         text: 'Export Excel',
                         exportOptions: {
                             // Specify the columns to include (use column index or column names)
-                            columns: [0, 2, 3, 4, 5] // Replace with the columns you want to include in the export
+                            columns: [0, 2, 3, 4, 5, 6] // Replace with the columns you want to include in the export
                         }
                     },
                     {
@@ -198,7 +199,7 @@
                         text: 'Print',
                         exportOptions: {
                             // Specify the columns to include (use column index or column names)
-                            columns: [0, 2, 3, 4, 5] // Replace with the columns you want to include in the export
+                            columns: [0, 2, 3, 4, 5, 6] // Replace with the columns you want to include in the export
                         }
                     }
                 ],
@@ -230,6 +231,7 @@
                     {data: 'code', name: 'code'},
                     {data: 'name', name: 'name'},
                     {data: 'material', name: 'material'},
+                    {data: 'MRP', name: 'MRP'},
                     {data: 'actions', name: 'actions', orderable: false, searchable: false},
                     /*{data: 'finishes', name: 'finishes'},*/
                 ]

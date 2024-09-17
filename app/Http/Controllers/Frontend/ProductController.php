@@ -13,12 +13,16 @@ class ProductController extends Controller
     {
         $category = $request->cid;
         $pcodes = $request->pcode;
-        $products = Product::where('code', 'like', '%' . $pcodes . '%')
-            ->orWhere('name', 'like', '%' . $pcodes . '%');
+        $products = Product::where(function($query) use ($pcodes) {
+            $query->where('code', 'like', '%' . $pcodes . '%')
+                ->orWhere('name', 'like', '%' . $pcodes . '%');
+        });
         if ($category) {
             $products = $products->where('category_id', $category);
         }
-        $products = $products->latest()->limit(10)->get();
+        $products = $products->latest() // This orders by `created_at` in descending order
+            ->limit(50)
+            ->get();
 
         return view('frontend.product.search', compact('products'));
 

@@ -62,10 +62,13 @@
                                     <label>Rate Per
                                         <span>:</span>
                                     </label>{{ ucwords($product->price_per) }}</li>
-                                <li>
-                                    <label>MRP
-                                        <span>:</span>
-                                    </label>{{ $product->MRP != '' ? $product->MRP : '-' }}</li>
+                                @if ($product->MRP != '' && $product->MRP != 0)
+                                    <li>
+                                        <label>MRP
+                                            <span>:</span>
+                                        </label>{{ $product->MRP != '' ? $product->MRP : '-' }}
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -86,7 +89,7 @@
                             <div class="tab-pane fade show active" id="description" role="tabpanel"
                                  aria-labelledby="description-tab">
                                 <div class="cr-tab-content">
-                                    <p class="mt-4 mb-4">Note : <b style="color: red">Red font</b> value is currently not available</p>
+                                    <p class="mt-4 mb-4">Note : <b style="color: red">Red font</b> value is currently not available in the display.</p>
                                     <div class="col-xl-12">
                                         <div class="">
                                             <div class="table-responsive">
@@ -114,7 +117,7 @@
                                                                 <td>
                                                                     {{-- Check if there is a value for the current row ($i) --}}
                                                                     @if (isset($attribute->attributeValues[$i]))
-                                                                        <p style="{{ $attribute->attributeValues[$i]->is_available == 0 ? 'color:red;' : '' }}; color: black">{{ $attribute->attributeValues[$i]->value }}</p>
+                                                                        <p style="{{ $attribute->attributeValues[$i]->is_available == 0 ? 'color:red;' : 'color: black;' }}; ">{{ $attribute->attributeValues[$i]->value }}</p>
                                                                     @else
                                                                         {{-- If there is no value, leave the cell empty --}}
                                                                         &nbsp;

@@ -58,7 +58,9 @@
                                                 @php
                                                    $image = $product->images->first();
                                                 @endphp
-                                                <img src="{{ $image->image_url }}" alt="product-1">
+                                                @if($image)
+                                                    <img src="{{ $image->image_url }}" alt="product-1">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="cr-product-details">

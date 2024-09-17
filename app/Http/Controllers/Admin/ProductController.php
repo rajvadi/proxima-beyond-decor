@@ -116,15 +116,17 @@ class ProductController extends Controller
 
             // upload base64 images
             $images = $request->get('product_images');
-            foreach ($images as $index => $image) {
-                $image_parts = explode(";base64,", $image);
-                $image_base64 = base64_decode($image_parts[1]);
-                $file = 'product/'.$product_id.'/'.$index. time() . '.png';
-                // store image in storage public folder
-                Storage::disk('public')->put($file, $image_base64);
-                $product->images()->create([
-                    'image' => $file
-                ]);
+            if (isset($images) && $images != '') {
+                foreach ($images as $index => $image) {
+                    $image_parts = explode(";base64,", $image);
+                    $image_base64 = base64_decode($image_parts[1]);
+                    $file = 'product/'.$product_id.'/'.$index. time() . '.png';
+                    // store image in storage public folder
+                    Storage::disk('public')->put($file, $image_base64);
+                    $product->images()->create([
+                        'image' => $file
+                    ]);
+                }
             }
 
             return redirect()->route('admin.product.index')->with('success', 'Product created successfully');

@@ -42,7 +42,9 @@
                                     <a href="javascript: void(0);" class="text-primary">{{ $product->category->name }}</a>
                                     <h4 class="mt-1 mb-3">{{ $product->name }} ({{ $product->code }})</h4>
                                     <h5 class="mb-4">Materials : <b>{{ $product->material != '' ? $product->material : '-' }}</b></h5>
-                                    <h5 class="mb-4">MRP : <b>{{ $product->MRP != '' ? $product->MRP : '-' }}</b></h5>
+                                    @if ($product->MRP != '' && $product->MRP != 0)
+                                        <h5 class="mb-4">MRP : <b>{{ $product->MRP != '' ? $product->MRP : '-' }}</b></h5>
+                                    @endif
                                     {!! $product->description !!}
                                 </div>
                             </div>
@@ -51,7 +53,7 @@
                         
                         <div class="mt-5">
                             <h5 class="mb-3">Specifications :</h5>
-                            <p>Note : <b style="color: red">Red font</b> value is currently not available</p>
+                            <p>Note : <b style="color: red">Red font</b> value is currently not available in the display.</p>
                             <div class="col-xl-12">
                                 <div class="card">
                                     <div class="card-body">

@@ -109,7 +109,7 @@
                                     <div class="col-sm-12">
                                         <div class="mb-3">
                                             <label for="material">Materials</label>
-                                            <input id="material" name="material" type="text" class="form-control @error('material') is-invalid @enderror" placeholder="Stainless steel">
+                                            <input id="material" name="material" required type="text" class="form-control @error('material') is-invalid @enderror" placeholder="Stainless steel">
                                             @error('material')
                                                 <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -236,7 +236,7 @@
                                 </ul>
                                 <div class="d-flex flex-wrap gap-2 mt-5">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>
-                                    <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button>
+                                    <a href="{{ route('admin.product.index') }}" type="button" class="btn btn-secondary waves-effect waves-light">Cancel</a>
                                 </div>
                             </div>
                         </div> <!-- end card-->

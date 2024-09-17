@@ -49,7 +49,7 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="name">MRP</label>
-                                <input id="MRP" value="{{ $product->MRP }}" name="MRP" type="text" required class="form-control @error('MRP') is-invalid @enderror" placeholder="0.68">
+                                <input id="MRP" value="{{ $product->MRP }}" name="MRP" type="text" class="form-control @error('MRP') is-invalid @enderror" placeholder="0.68">
                                 @error('MRP')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -62,7 +62,7 @@
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label for="material">Materials</label>
-                                <input id="material" value="{{ $product->material }}" name="material" type="text" class="form-control @error('material') is-invalid @enderror" placeholder="Stainless steel">
+                                <input id="material" value="{{ $product->material }}" required name="material" type="text" class="form-control @error('material') is-invalid @enderror" placeholder="Stainless steel">
                                 @error('material')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

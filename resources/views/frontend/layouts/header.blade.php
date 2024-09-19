@@ -4,9 +4,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="top-header">
-                    <a href="{{ route('home') }}" class="cr-logo">
+                    <a href="{{ route('home') }}" class="cr-logo d-flex">
+                        <img src="{{ asset('FE/assets/img/logo/logo-light.svg') }}" style="margin-right: 10px;" alt="logo" >
                         <img src="{{ asset('FE/assets/img/logo/logo.png') }}" alt="logo" class="logo">
-                        <img src="{{ asset('FE/assets/img/logo/dark-logo.png') }}" alt="logo" class="dark-logo">
                     </a>
                     <form class="cr-search" action="{{ route('search') }}">
                         @csrf

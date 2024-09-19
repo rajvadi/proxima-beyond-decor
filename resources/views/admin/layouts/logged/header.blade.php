@@ -17,7 +17,7 @@
                                     <img src="{{ asset('assets/images/logo-light.svg') }}" alt="" height="22">
                                 </span>
                     <span class="logo-lg">
-                                    <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="19">
+                                    <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="55">
                                 </span>
                 </a>
             </div>
@@ -28,13 +28,6 @@
         </div>
         
         <div class="d-flex">
-            
-            <div class="dropdown d-inline-block d-lg-none ms-2">
-                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="mdi mdi-magnify"></i>
-                </button>
-            </div>
             
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect"

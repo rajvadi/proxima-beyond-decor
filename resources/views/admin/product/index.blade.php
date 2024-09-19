@@ -11,7 +11,11 @@
 @endsection
 
 @section('style')
-
+<style>
+    .dataTables_length {
+        margin-top: 8px !important;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -171,7 +175,7 @@
             });
 
             let datatable = table.DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 scrollCollapse: true,
                 autoWidth: false,
                 responsive: true,
@@ -234,7 +238,9 @@
                     /*{data: 'MRP', name: 'MRP'},*/
                     {data: 'actions', name: 'actions', orderable: false, searchable: false},
                     /*{data: 'finishes', name: 'finishes'},*/
-                ]
+                ],
+                lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+                pageLength: 10
             });
 
             // change status

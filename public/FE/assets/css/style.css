@@ -1404,8 +1404,8 @@ header {
   z-index: 4;
 }
 .top-header .cr-logo img {
-  width: 115px;
-  height: 35px;
+  /*width: 115px;*/
+  height: 45px;
 }
 .top-header .cr-search {
   position: relative;

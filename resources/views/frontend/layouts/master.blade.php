@@ -11,7 +11,7 @@
     <title>Proxima Beyond Decor</title>
     
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('FE/assets/img/logo/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('FE/assets/img/logo/favicon.ico') }}">
     @include('frontend.layouts.css')
     @yield('style')
 </head>

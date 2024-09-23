@@ -27,7 +27,7 @@
     </div>
     <div class="cr-fix" id="cr-main-menu-desk">
         <div class="container">
-            <div class="text-center mt-3" style="color: #009adc">
+            <div class="text-center mt-3" style="color: #f31f87">
                 <h4>Welcome To Proxima Beyond Decor</h4>
             </div>
         </div>

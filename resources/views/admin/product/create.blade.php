@@ -161,7 +161,7 @@
                                             <tr id="attribute-head">
                                                 <th>Actions</th>
                                                 <th>
-                                                    <input type="text" list="attributes" name="attributes[0][name]" required class="form-control" placeholder="Default Attribute">
+                                                    <input type="text" list="attributes" name="attributes[0][name]" class="form-control" placeholder="Default Attribute">
                                                 </th>
                                             </tr>
                                             </thead>
@@ -169,7 +169,7 @@
                                             <tr data-value-index="0">
                                                 <td><button type="button" title="Delete Value" class="delete-row" style="color: #d17981;cursor: no-drop;" disabled><i class="fa fa-trash"></i></button></td>
                                                 <td>
-                                                    <input type="text" name="values[0][0]" required class="form-control" placeholder="Value">
+                                                    <input type="text" name="values[0][0]" class="form-control" placeholder="Value">
                                                     <p style="margin-left: 50%;
     margin-top: 10px;">Available : <input type="checkbox" name="availables[0][0]"  value="1" checked></p>
                                                 </td>

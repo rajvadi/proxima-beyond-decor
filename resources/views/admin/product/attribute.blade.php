@@ -28,7 +28,7 @@
                                         @if($product->attributes()->count() > 0)
                                             @foreach($product->attributes as $index => $attribute)
                                                 <th>
-                                                    <input type="text" list="attributes" name="attributes[{{ $index }}][name]" required class="form-control" value="{{ $attribute->name }}" placeholder="Default Attribute">
+                                                    <input type="text" list="attributes" name="attributes[{{ $index }}][name]" class="form-control" value="{{ $attribute->name }}" placeholder="Default Attribute">
                                                     @if($index != 0)
                                                         <button type="button" class="delete-attribute" style="margin-left: 50%;margin-top: 5px;" title="Delete Attribute" data-index="{{ $index }}">
                                                             <i class="fa fa-trash"></i>
@@ -38,7 +38,7 @@
                                             @endforeach
                                         @else
                                             <th>
-                                                <input type="text" list="attributes" name="attributes[0][name]" required class="form-control" placeholder="Default Attribute">
+                                                <input type="text" list="attributes" name="attributes[0][name]" class="form-control" placeholder="Default Attribute">
                                             </th>
                                         @endif
                                     </tr>
@@ -73,7 +73,7 @@
                                                     <td data-attr-index="{{ $key }}">
                                                         {{-- Check if there is a value for the current row ($i) --}}
                                                         @if (isset($attribute->attributeValues[$i]))
-                                                            <input type="text" name="values[{{ $i }}][{{ $key }}]" required class="form-control" value="{{ $attribute->attributeValues[$i]->value }}" placeholder="Value">
+                                                            <input type="text" name="values[{{ $i }}][{{ $key }}]" class="form-control" value="{{ $attribute->attributeValues[$i]->value }}" placeholder="Value">
                                                             <p style="margin-left: 50%;margin-top: 10px;">
                                                                 Available :
                                                                 <input type="checkbox" name="availables[{{ $i }}][{{ $key }}]" value="1" {{ $attribute->attributeValues[$i]->is_available == 0 ? '' : 'checked' }}>
@@ -91,7 +91,7 @@
                                                 </button>
                                             </td>
                                             <td>
-                                                <input type="text" name="values[0][0]" required class="form-control" placeholder="Value">
+                                                <input type="text" name="values[0][0]" class="form-control" placeholder="Value">
                                                 <p style="margin-left: 50%;
         margin-top: 10px;">Available :
                                                     <input type="checkbox" name="availables[0][0]" value="1" checked>

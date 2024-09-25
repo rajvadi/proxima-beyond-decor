@@ -93,24 +93,26 @@ class ProductController extends Controller
             $attributes = $request->get('attributes');
             $values = $request->get('values');
             $available_values = $request->get('availables');
-            foreach ($attributes as $index => $attributeData) {
-                // Create or find the attribute
-                $attribute = Attribute::firstOrCreate(['name' => $attributeData['name']]);
+            if (isset($attributes) && $attributes[0]['name'] != '') {
+                foreach ($attributes as $index => $attributeData) {
+                    // Create or find the attribute
+                    $attribute = Attribute::firstOrCreate(['name' => $attributeData['name']]);
 
-                // Link the product to the attribute
-                $productAttribute = ProductAttribute::create([
-                    'product_id' => $product->id,
-                    'attribute_id' => $attribute->id,
-                ]);
-
-                // Loop through the values to create the attribute values
-                foreach ($values as $key => $value) {
-                    // Save each attribute value
-                    AttributeValue::create([
-                        'product_attribute_id' => $productAttribute->id,
-                        'value' => $value[$index],
-                        'is_available' => isset($available_values[$key][$index]) ? 1 : 0,
+                    // Link the product to the attribute
+                    $productAttribute = ProductAttribute::create([
+                        'product_id' => $product->id,
+                        'attribute_id' => $attribute->id,
                     ]);
+
+                    // Loop through the values to create the attribute values
+                    foreach ($values as $key => $value) {
+                        // Save each attribute value
+                        AttributeValue::create([
+                            'product_attribute_id' => $productAttribute->id,
+                            'value' => $value[$index],
+                            'is_available' => isset($available_values[$key][$index]) ? 1 : 0,
+                        ]);
+                    }
                 }
             }
 
@@ -217,24 +219,26 @@ class ProductController extends Controller
 
             // Delete all existing attributes
             ProductAttribute::where('product_id',$product->id)->delete();
-            foreach ($attributes as $index => $attributeData) {
-                // Create or find the attribute
-                $attribute = Attribute::firstOrCreate(['name' => $attributeData['name']]);
+            if (isset($attributes) && $attributes[0]['name'] != '') {
+                foreach ($attributes as $index => $attributeData) {
+                    // Create or find the attribute
+                    $attribute = Attribute::firstOrCreate(['name' => $attributeData['name']]);
 
-                // Link the product to the attribute
-                $productAttribute = ProductAttribute::create([
-                    'product_id' => $product->id,
-                    'attribute_id' => $attribute->id,
-                ]);
-
-                // Loop through the values to create the attribute values
-                foreach ($values as $key => $value) {
-                    // Save each attribute value
-                    AttributeValue::create([
-                        'product_attribute_id' => $productAttribute->id,
-                        'value' => $value[$index],
-                        'is_available' => isset($available_values[$key][$index]) ? 1 : 0,
+                    // Link the product to the attribute
+                    $productAttribute = ProductAttribute::create([
+                        'product_id' => $product->id,
+                        'attribute_id' => $attribute->id,
                     ]);
+
+                    // Loop through the values to create the attribute values
+                    foreach ($values as $key => $value) {
+                        // Save each attribute value
+                        AttributeValue::create([
+                            'product_attribute_id' => $productAttribute->id,
+                            'value' => $value[$index],
+                            'is_available' => isset($available_values[$key][$index]) ? 1 : 0,
+                        ]);
+                    }
                 }
             }
             // update price_per field

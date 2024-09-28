@@ -21,11 +21,13 @@ class ProductController extends Controller
     public function index()
     {
         if (request()->ajax()) {
+            // Get all products DESC order by id
             $products = Product::query();
             $category_id = request()->get('category_id');
             if ($category_id) {
                 $products->where('category_id', $category_id);
             }
+            $products = $products->latest();
             return DataTables::of($products)
                 ->addIndexColumn()
                 ->addColumn('category', function ($product) {

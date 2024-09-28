@@ -58,10 +58,12 @@
                                     <label>Materials
                                         <span>:</span>
                                     </label>{{ $product->material }}</li>
-                                <li>
-                                    <label>Rate Per
-                                        <span>:</span>
-                                    </label>{{ ucwords($product->price_per) }}</li>
+                                @if($product->price_per != '' && $product->price_per != 'none')
+                                    <li>
+                                        <label>Rate Per
+                                            <span>:</span>
+                                        </label>{{ ucwords($product->price_per) }}</li>
+                                @endif
                                 @if ($product->MRP != '' && $product->MRP != 0)
                                     <li>
                                         <label>MRP
@@ -128,7 +130,9 @@
                                                     @endfor
                                                     </tbody>
                                                 </table>
-                                                <p class="mt-2">Rate Per {{ ucwords($product->price_per != '' && $product->price_per != 'none' ? $product->price_per : '-') }}</p>
+                                                @if($product->price_per != '' && $product->price_per != 'none')
+                                                    <p class="mt-2">Rate Per {{ ucwords($product->price_per != '' && $product->price_per != 'none' ? $product->price_per : '-') }}</p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

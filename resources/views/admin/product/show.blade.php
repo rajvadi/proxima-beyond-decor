@@ -42,7 +42,9 @@
                                     <a href="javascript: void(0);" class="text-primary">{{ $product->category->name }}</a>
                                     <h4 class="mt-1 mb-3">{{ $product->name }} ({{ $product->code }})</h4>
                                     <h5 class="mb-4">Materials : <b>{{ $product->material != '' ? $product->material : '-' }}</b></h5>
-                                    <h5 class="mb-4">Rate Par : <b>{{ $product->price_per != '' && $product->price_per != 'none' ? $product->price_per : '-' }}</b></h5>
+                                    @if($product->price_per != '' && $product->price_per != 'none')
+                                        <h5 class="mb-4">Rate Par : <b>{{ $product->price_per != '' && $product->price_per != 'none' ? $product->price_per : '-' }}</b></h5>
+                                    @endif
                                     @if ($product->MRP != '' && $product->MRP != 0)
                                         <h5 class="mb-4">MRP : <b>{{ $product->MRP != '' ? $product->MRP : '-' }}</b></h5>
                                     @endif
@@ -94,7 +96,9 @@
                                                     @endfor
                                                     </tbody>
                                                 </table>
-                                                <p class="mt-2">Rate Per {{ ucwords($product->price_per) }}</p>
+                                                @if($product->price_per != '' && $product->price_per != 'none')
+                                                    <p class="mt-2">Rate Per {{ ucwords($product->price_per) }}</p>
+                                                @endif
                                             </div>
                                         
                                         </div>

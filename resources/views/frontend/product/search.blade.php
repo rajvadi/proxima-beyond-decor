@@ -69,7 +69,7 @@
                                             </div>
                                             <a href="{{ route('product.show',['product' => $product->id]) }}" class="title">{{ $product->code.' - '.$product->name }}</a>
                                             <h6>Materials : {{ $product->material }}</h6>
-                                            <p>Rate Per {{ ucwords($product->price_per) }}</p>
+                                            <p>Rate Per {{ ucwords($product->price_per != '' && $product->price_per != 'none' ? $product->price_per : '-') }}</p>
                                         </div>
                                     </div>
                                 </div>

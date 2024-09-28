@@ -128,7 +128,7 @@
                                                     @endfor
                                                     </tbody>
                                                 </table>
-                                                <p class="mt-2">Rate Per {{ ucwords($product->price_per) }}</p>
+                                                <p class="mt-2">Rate Per {{ ucwords($product->price_per != '' && $product->price_per != 'none' ? $product->price_per : '-') }}</p>
                                             </div>
                                         </div>
                                     </div>

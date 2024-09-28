@@ -188,7 +188,7 @@
                                                 <label class="form-check-label" for="price_per2">
                                                     Price Per Set
                                                 </label>
-                                                <input class="form-check-input" type="radio" name="price_per" value="set" id="none2">
+                                                <input class="form-check-input" type="radio" name="price_per" value="none" id="none2">
                                                 <label class="form-check-label" for="none2">
                                                     None
                                                 </label>

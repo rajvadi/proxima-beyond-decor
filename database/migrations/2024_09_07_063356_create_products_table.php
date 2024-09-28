@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('material')->nullable();
             $table->string('finishes')->nullable();
-            $table->enum('price_per', ['piece', 'set'])->default('piece');
+            $table->enum('price_per', ['piece', 'set','none'])->nullable();
             $table->decimal('MRP', 10, 2)->nullable();
             $table->boolean('status')->default(true)->comment('1=Active, 0=Inactive');
             $table->timestamps();

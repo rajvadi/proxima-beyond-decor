@@ -180,13 +180,17 @@
                                             <button type="button" id="add-attribute" class="btn btn-primary">Add Attribute</button>
                                             <button type="button" id="add-value" class="btn btn-secondary">Add Value Row</button>
                                             <div class="mt-3">
-                                                <input class="form-check-input" type="radio" name="price_per" id="price_per1" value="piece" checked="">
+                                                <input class="form-check-input" type="radio" name="price_per" id="price_per1" value="piece">
                                                 <label class="form-check-label me-2" for="price_per1">
                                                     Price Per Piece
                                                 </label>
                                                 <input class="form-check-input" type="radio" name="price_per" value="set" id="price_per2">
                                                 <label class="form-check-label" for="price_per2">
                                                     Price Per Set
+                                                </label>
+                                                <input class="form-check-input" type="radio" name="price_per" value="set" id="none2">
+                                                <label class="form-check-label" for="none2">
+                                                    None
                                                 </label>
                                             </div>
                                         </div>

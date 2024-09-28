@@ -74,7 +74,7 @@ class ProductController extends Controller
             'code' => 'required',
             'description' => 'nullable',
             'material' => 'nullable',
-            'price_per' => 'required|in:piece,set',
+            'price_per' => 'nullable|in:piece,set,none',
             'MRP' => 'nullable',
             'product_images' => 'array',
             'product_images.*' => 'string',

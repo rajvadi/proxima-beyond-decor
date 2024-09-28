@@ -114,6 +114,10 @@
                                     <label class="form-check-label" for="price_per2">
                                         Price Per Set
                                     </label>
+                                    <input class="form-check-input" type="radio" name="price_per" value="none" {{ $product->price_per == 'none' ? 'checked' : '' }} id="none2">
+                                    <label class="form-check-label" for="none2">
+                                        None
+                                    </label>
                                 </div>
                             </div>
                             <div class="d-flex flex-wrap gap-2 mt-5">

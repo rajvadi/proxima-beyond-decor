@@ -11,7 +11,6 @@
             width: 100%; /* Set your desired container width */
             max-width: 400px; /* Optional: Set a maximum width for the container */
             height: 300px; /* Set the height of the container */
-            background-color: #f0f0f0; /* Optional: Set a background color for aesthetics */
         }
 
         .zoom-image-hover img {

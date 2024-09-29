@@ -37,7 +37,7 @@ class ProductController extends Controller
                     // Get the first image of the product if available
                     $image = $product->images->first();
                     if ($image) {
-                        return '<img src="'.$image->image_url.'" width="100px" height="100px">';
+                        return '<img src="'.$image->image_url.'" style="object-fit: contain;" width="100px" height="100px">';
                     }
                 })->addColumn('actions', function ($product) {
                     return

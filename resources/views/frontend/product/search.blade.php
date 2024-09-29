@@ -27,10 +27,10 @@
                         <div class="col-12">
                             <div class="cr-shop-bredekamp">
                                 <div class="cr-toggle">
-                                    <a href="javascript:void(0)" class="gridCol">
+                                    <a href="javascript:void(0)" class="gridCol active-grid">
                                         <i class="ri-grid-line"></i>
                                     </a>
-                                    <a href="javascript:void(0)" class="gridRow active-grid">
+                                    <a href="javascript:void(0)" class="gridRow">
                                         <i class="ri-list-check-2"></i>
                                     </a>
                                 </div>
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row col-50 mb-minus-24 col-size">
+                    <div class="row col-50 mb-minus-24">
                         @if($products->count() == 0)
                             <div class="col-lg-12">
                                 <div class="cr-shop-bredekamp">

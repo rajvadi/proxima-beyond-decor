@@ -47,7 +47,7 @@
                                 <div class="slider slider-nav thumb-image">
                                     @foreach($product->images as $image)
                                         <div class="thumbnail-image">
-                                            <div class="thumbImg" style="display: flex; justify-content: center;align-items: center;overflow: hidden;width: 100%;max-width: 400px;">
+                                            <div class="thumbImg" style="display: flex; justify-content: center;align-items: center;overflow: hidden;width: 100%;max-width: 400px;height: 200px;">
                                                 <img src="{{ $image->image_url }}" style="width: 100%;height: 100%;object-fit: contain;" alt="product-tab-1">
                                             </div>
                                         </div>

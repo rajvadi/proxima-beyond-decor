@@ -1,5 +1,20 @@
 <style>
+    .image-container {
+        display: flex; /* Optional: to align multiple images side by side */
+        justify-content: center; /* Center the image horizontally */
+        align-items: center; /* Center the image vertically */
+        overflow: hidden; /* Hide overflow if the image is larger than the container */
+        width: 100%; /* Set your desired container width */
+        max-width: 400px; /* Optional: Set a maximum width for the container */
+        height: 300px; /* Set the height of the container */
+        background-color: #f0f0f0; /* Optional: Set a background color for aesthetics */
+    }
 
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Crop the image to fill the container while preserving aspect ratio */
+    }
 </style>
 <div class="">
     <div class="container-fluid">
@@ -25,7 +40,7 @@
                                                 <div class="tab-content" id="v-pills-tabContent">
                                                     @foreach($product->images as $key => $image)
                                                         <div class="tab-pane fade {{ $key == 0 ? 'show active' : '' }}" id="product-{{ $key + 1 }}" role="tabpanel" aria-labelledby="product-{{ $key + 1 }}-tab">
-                                                            <div>
+                                                            <div class="image-container">
                                                                 <img src="{{ $image->image_url }}" style="width: auto;" alt="" class="img-fluid mx-auto d-block">
                                                             </div>
                                                         </div>

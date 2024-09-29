@@ -18,7 +18,7 @@
                                         <div class="slider-banner-image">
                                             <div class="zoom-image-hover">
                                                 <img src="{{ $image->image_url }}" alt="product-tab-1"
-                                                     class="product-image">
+                                                     class="product-image" style="width: auto">
                                             </div>
                                         </div>
                                     @endforeach

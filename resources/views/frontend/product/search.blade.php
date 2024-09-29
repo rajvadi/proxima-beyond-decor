@@ -2,6 +2,23 @@
 @section('title', 'Home Page')
 
 @section('style')
+    <style>
+        .zoom-image-hover{
+            display: flex; /* Optional: to align multiple images side by side */
+            justify-content: center; /* Center the image horizontally */
+            align-items: center; /* Center the image vertically */
+            overflow: hidden; /* Hide overflow if the image is larger than the container */
+            width: 100%; /* Set your desired container width */
+            max-width: 400px; /* Optional: Set a maximum width for the container */
+            height: 300px; /* Set the height of the container */
+        }
+
+        .zoom-image-hover {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Crop the image to fill the container while preserving aspect ratio */
+        }
+    </style>
 @endsection
 
 @section('content')

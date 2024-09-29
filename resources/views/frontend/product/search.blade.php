@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+    <section class="section-breadcrumb">
+    </section>
     <!-- Hero slider -->
     <section class="section-shop padding-tb-100">
         <div class="container">

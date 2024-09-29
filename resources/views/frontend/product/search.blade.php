@@ -2,23 +2,6 @@
 @section('title', 'Home Page')
 
 @section('style')
-    <style>
-        .zoom-image-hover{
-            display: flex; /* Optional: to align multiple images side by side */
-            justify-content: center; /* Center the image horizontally */
-            align-items: center; /* Center the image vertically */
-            overflow: hidden; /* Hide overflow if the image is larger than the container */
-            width: 100%; /* Set your desired container width */
-            max-width: 400px; /* Optional: Set a maximum width for the container */
-            height: 300px; /* Set the height of the container */
-        }
-
-        .zoom-image-hover {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Crop the image to fill the container while preserving aspect ratio */
-        }
-    </style>
 @endsection
 
 @section('content')
@@ -71,12 +54,12 @@
                                 <div class="col-lg-3 col-6 cr-product-box mb-24">
                                     <div class="cr-product-card">
                                         <div class="cr-product-image">
-                                            <div class="cr-image-inner zoom-image-hover">
+                                            <div class="cr-image-inner zoom-image-hover" style="display: flex; justify-content: center;align-items: center;overflow: hidden;width: 100%;max-width: 400px;height: 300px;">
                                                 @php
                                                    $image = $product->images->first();
                                                 @endphp
                                                 @if($image)
-                                                    <img src="{{ $image->image_url }}" alt="product-1">
+                                                    <img src="{{ $image->image_url }}" alt="product-1" style="width: 100%;height: 100%;object-fit: contain;">
                                                 @endif
                                             </div>
                                         </div>

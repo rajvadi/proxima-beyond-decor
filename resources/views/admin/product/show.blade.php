@@ -26,7 +26,7 @@
                                                     @foreach($product->images as $key => $image)
                                                         <div class="tab-pane fade {{ $key == 0 ? 'show active' : '' }}" id="product-{{ $key + 1 }}" role="tabpanel" aria-labelledby="product-{{ $key + 1 }}-tab">
                                                             <div>
-                                                                <img src="{{ $image->image_url }}" style="width: 100%;" alt="" class="img-fluid mx-auto d-block">
+                                                                <img src="{{ $image->image_url }}" style="width: auto;" alt="" class="img-fluid mx-auto d-block">
                                                             </div>
                                                         </div>
                                                     @endforeach

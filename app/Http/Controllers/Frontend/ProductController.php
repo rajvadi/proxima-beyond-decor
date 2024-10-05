@@ -21,7 +21,7 @@ class ProductController extends Controller
             $products = $products->where('category_id', $category);
         }
         $products = $products->latest() // This orders by `created_at` in descending order
-            ->limit(500)
+            ->limit(50)
             ->get();
 
         return view('frontend.product.search', compact('products'));

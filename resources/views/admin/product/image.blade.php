@@ -13,7 +13,7 @@
                                 <div class="d-flex p-2">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar-sm bg-light rounded">
-                                            <img data-dz-thumbnail="" class="img-fluid rounded d-block" src="{{ $image->image_url }}">
+                                            <img data-dz-thumbnail="" style="object-fit: cover;width: 100%;max-height: 50px;" class="img-fluid rounded d-block" src="{{ $image->image_url }}">
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">

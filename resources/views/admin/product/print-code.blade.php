@@ -78,7 +78,7 @@
                                 </div>
                                 
                                 <div class="d-flex flex-wrap gap-2 mt-5">
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="bx bx-printer"></i> Print</button>
                                     <a href="{{ route('admin.product.index') }}" type="button" class="btn btn-secondary waves-effect waves-light">Cancel</a>
                                 </div>
                             </div>

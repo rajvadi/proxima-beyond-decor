@@ -24,6 +24,13 @@
                         <li class="{{ request()->is('admin/product/create') || request()->is('admin/product/*/edit') ? 'mm-active' : '' }}"><a href="{{ route('admin.product.create') }}" key="t-add-product" class="{{ request()->is('admin/product/create') || request()->is('admin/product/*/edit') ? 'active' : '' }}">Add</a></li>
                     </ul>
                 </li>
+                
+                <li>
+                    <a href="{{ route('admin.product.print') }}" class="waves-effect {{ request()->is('admin/product/print') || request()->is('admin/product/print/*') ? 'active' : '' }}">
+                        <i class="bx bx-printer"></i>
+                        <span key="t-chat">Print Code</span>
+                    </a>
+                </li>
             
             </ul>
         </div>

@@ -287,4 +287,26 @@ class ProductController extends Controller
 
         return $pdf->stream('document.pdf'); // Stream the PDF in the browser
     }
+
+    public function printProductCode(Request $request)
+    {
+        if (request()->isMethod('post')) {
+            $products = $request->product;
+            $qty = $request->qty;
+
+            $productData = [];
+            foreach ($products as $key => $product) {
+                $product = Product::find($product);
+                $product->qty = $qty[$key];
+                $productData[] = $product;
+            }
+            $data = ['title' => 'A4 Size product page','products' => $productData]; // Pass any data to your view
+            $pdf = PDF::loadView('admin.product.print', $data)
+                ->setPaper('a4', 'portrait'); // Set the paper size to A4 and orientation to portrait
+
+            return $pdf->stream('document.pdf'); // Stream the PDF in the browser
+        }
+        $products = Product::all();
+        return view('admin.product.print-code',compact('products'));
+    }
 }

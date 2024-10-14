@@ -33,7 +33,8 @@
 <body>
 
 @foreach($products as $index => $product)
-    <div @if($index < count($products) - 1) class="page-break" @endif>
+    {{--@if($index < count($products) - 1) class="page-break" @endif--}}
+    <div>
         <table>
             @for($i = 0; $i < $product->qty; $i++)
                 @if($i % 3 == 0)

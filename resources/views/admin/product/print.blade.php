@@ -45,7 +45,9 @@
                                 <div class="card-body">
                                     <p>Code : {{ $product->code }}</p>
                                     <p>Rs. : {{ $product->MRP }}</p>
-                                    <p>Name : {{ $product->name }}</p>
+                                    @if($product->is_name_print)
+                                        <p>Name : {{ $product->name }}</p>
+                                    @endif
                                 </div>
                             </div>
                         </td>

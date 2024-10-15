@@ -293,11 +293,13 @@ class ProductController extends Controller
         if (request()->isMethod('post')) {
             $products = $request->product;
             $qty = $request->qty;
+            $isNamePrint = $request->is_product_name;
 
             $productData = [];
             foreach ($products as $key => $product) {
                 $product = Product::find($product);
                 $product->qty = $qty[$key];
+                $product->is_name_print = isset($isNamePrint[$key]) ? $isNamePrint[$key] : 0;
                 $productData[] = $product;
             }
             $data = ['title' => 'A4 Size product page','products' => $productData]; // Pass any data to your view

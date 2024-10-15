@@ -61,9 +61,18 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
                                             <label for="qty" class="form-label">Qty</label>
                                             <input type="number" name="qty[]" class="form-control" min="1" required>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label for="is_name_print" class="form-label">Print Name</label>
+                                            <div class="mt-3">
+                                                <input class="form-check-input" checked type="radio" name="is_product_name[0]" id="price_per1_0" value="1">
+                                                <label class="form-check-label me-2" for="price_per1_0">Yes</label>
+                                                <input class="form-check-input" type="radio" name="is_product_name[0]" id="price_per2_0" value="0">
+                                                <label class="form-check-label" for="price_per2_0">No</label>
+                                            </div>
                                         </div>
                                         <div class="col-md-2 d-flex align-items-end">
                                             <!-- Empty space for first row -->
@@ -107,6 +116,7 @@
             $('.form-select').select2();
             
             let formRows = $('#form-rows');
+            let rowIndex = 1; // Initialize row index for unique ID generation
 
             // Add more rows
             $('#add-row').click(function () {
@@ -120,8 +130,16 @@
                                 @endforeach
                             </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <input type="number" name="qty[]" class="form-control" min="1" required>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="mt-3">
+                            <input class="form-check-input" checked type="radio" name="is_product_name[${rowIndex}]" id="price_per1_${rowIndex}" value="1">
+                            <label class="form-check-label me-2" for="price_per1_${rowIndex}">Yes</label>
+                            <input class="form-check-input" type="radio" name="is_product_name[${rowIndex}]" id="price_per2_${rowIndex}" value="0">
+                            <label class="form-check-label" for="price_per2_${rowIndex}">No</label>
+                        </div>
                     </div>
                     <div class="col-md-2 d-flex align-items-end">
                         <button type="button" class="btn btn-danger remove-row">
@@ -131,6 +149,7 @@
                 </div>`;
 
                 formRows.append(newRow);
+                rowIndex++; // Increment row index to ensure unique IDs
                 $('.form-select').select2();
             });
 

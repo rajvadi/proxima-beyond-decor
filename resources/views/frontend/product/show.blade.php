@@ -38,7 +38,7 @@
             margin: auto;
             display: block;
             max-width: 80%;
-            max-height: 80%;
+            max-height: 85%;
         }
 
         /* Add Animation */

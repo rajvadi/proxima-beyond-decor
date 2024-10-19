@@ -18,12 +18,88 @@
             height: 100%;
             object-fit: cover; /* Crop the image to fill the container while preserving aspect ratio */
         }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 99; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+
+        /* Modal Content (image) */
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+        /* Add Animation */
+        .modal-content, #caption {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+            from {-webkit-transform:scale(1)}
+            to {-webkit-transform:scale(2)}
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0.4)}
+            to {transform:scale(1)}
+        }
+
+        @keyframes zoom-out {
+            from {transform:scale(1)}
+            to {transform:scale(0)}
+        }
+
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 100% Image Width on Smaller Screens */
+        @media only screen and (max-width: 700px){
+            .modal-content {
+                width: 100%;
+            }
+        }
+    
     </style>
 @endsection
 
 @section('content')
     <section class="section-breadcrumb">
     </section>
+    <!-- Modal Structure -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
     <!-- Product -->
     <section class="section-product padding-t-100">
         <div class="container">
@@ -166,4 +242,29 @@
 @endsection
 
 @section('script')
+    <script>
+        // Add event listener to all images with the class 'zoomImg'
+        document.querySelectorAll('.zoomImg').forEach(function (image) {
+            image.addEventListener('click', function () {
+                // Get the source of the clicked image
+                var imageUrl = this.src;
+                openModal(imageUrl); // Call the modal opening function
+            });
+        });
+
+        // Open the modal and set the clicked image
+        function openModal(imageUrl) {
+            var modal = document.getElementById("imageModal");
+            var modalImage = document.getElementById("modalImage");
+            modal.style.display = "block";
+            modalImage.src = imageUrl;
+        }
+
+        // Close the modal when clicked
+        function closeModal() {
+            var modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
+    
+    </script>
 @endsection

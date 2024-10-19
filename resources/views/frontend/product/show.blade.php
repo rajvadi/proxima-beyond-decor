@@ -39,6 +39,7 @@
             display: block;
             max-width: 80%;
             max-height: 85%;
+            object-fit: contain;
         }
 
         /* Add Animation */

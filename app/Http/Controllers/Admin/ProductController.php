@@ -305,7 +305,8 @@ class ProductController extends Controller
             $data = ['title' => 'A4 Size product page','products' => $productData]; // Pass any data to your view
             $pdf = PDF::loadView('admin.product.print', $data)
                 ->setPaper('a4', 'portrait'); // Set the paper size to A4 and orientation to portrait
-
+            // print html for testing
+            //return view('admin.product.print', $data);
             return $pdf->stream('document.pdf'); // Stream the PDF in the browser
         }
         $products = Product::all();

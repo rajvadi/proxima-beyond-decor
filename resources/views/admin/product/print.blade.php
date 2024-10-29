@@ -23,46 +23,52 @@
         td {
             vertical-align: top;
             padding: 10px;
-        }
-
-        .page-break {
-            page-break-after: always;
+            width: 33%;
         }
     </style>
 </head>
 <body>
 
-@foreach($products as $index => $product)
-    {{--@if($index < count($products) - 1) class="page-break" @endif--}}
-    <div>
-        <table>
+<table>
+    <tr>
+        @php
+            $counter = 0; // To keep track of items in the row
+        @endphp
+        
+        @foreach($products as $product)
             @for($i = 0; $i < $product->qty; $i++)
-                @if($i % 3 == 0)
-                    <tr>
-                        @endif
-                        <td width="33%">
-                            <div class="card mini-stats-wid">
-                                <div class="card-body">
-                                    <p>Code : {{ $product->code }}</p>
-                                    <p>Rs. : {{ $product->MRP }}</p>
-                                    @if($product->is_name_print)
-                                        <p>Name : {{ $product->name }}</p>
-                                    @endif
-                                </div>
-                            </div>
-                        </td>
-                        
-                        @if($i % 3 == 2)
-                    </tr>
-                    @endif
-                    @endfor
-                    
-                    {{-- Close the last row if it’s not a full row of 3 items --}}
-                    @if(21 % 3 != 0)
-                        </tr>
-                @endif
-        </table>
-    </div>
-@endforeach
+                <td>
+                    <div class="card mini-stats-wid">
+                        <div class="card-body">
+                            <p>Code : {{ $product->code }}</p>
+                            <p>Rs. : {{ $product->MRP }}</p>
+                            @if($product->is_name_print)
+                                <p>Name : {{ $product->name }}</p>
+                            @endif
+                        </div>
+                    </div>
+                </td>
+                
+                @php
+                    $counter++;
+                @endphp
+                
+                {{-- Start a new row every 3 items --}}
+                @if($counter % 3 == 0)
+    </tr>
+    <tr>
+        @endif
+        @endfor
+        @endforeach
+        
+        {{-- Close the last row if it’s not a full set of 3 --}}
+        @if($counter % 3 != 0)
+            @for($j = 0; $j < 3 - ($counter % 3); $j++)
+                <td></td>
+            @endfor
+        @endif
+    </tr>
+</table>
+
 </body>
 </html>

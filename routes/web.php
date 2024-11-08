@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ProductController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,17 @@ Route::get('/', function () {
 Route::get('search', [ProductController::class, 'search'])->name('search');
 
 Route::get('product/{product}', [ProductController::class, 'show'])->name('product.show');
+
+Route::get('/run-backup', function () {
+    // Run the backup command
+    Artisan::call('backup:database');
+
+    // Optionally, capture the output and return it
+    $output = Artisan::output();
+
+    return response()->json([
+        'message' => 'Backup command executed.',
+        'output' => $output,
+    ]);
+});
 

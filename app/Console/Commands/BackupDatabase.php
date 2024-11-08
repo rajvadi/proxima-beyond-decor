@@ -4,7 +4,9 @@ namespace App\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class BackupDatabase extends Command
 {
@@ -33,42 +35,51 @@ class BackupDatabase extends Command
     public function handle()
     {
         $filename = 'backup-' . Carbon::now()->format('Y-m-d') . '.sql';
-        $path = storage_path('app/' . $filename);
+        $path = storage_path('app/backups/' . $filename);
 
-        // Update command syntax and add error handling
-        $username = config('database.connections.mysql.username');
-        $password = config('database.connections.mysql.password');
         $database = config('database.connections.mysql.database');
-        $host = config('database.connections.mysql.host');
+        $backupSql = "";
+        $backupSql .= "CREATE DATABASE IF NOT EXISTS `$database`;\n";
+        $backupSql .= "USE `$database`;\n\n";
+        $tables = DB::select('SHOW TABLES');
 
-        // Construct the command
-        // if password is empty, don't include it in the command
-        if (empty($password)) {
-            $command = "mysqldump -u {$username} -h {$host} {$database} > {$path}";
-        } else {
-            $command = "mysqldump -u {$username} -p{$password} -h {$host} {$database} > {$path}";
-        }
-        // Execute the command and capture any errors
-        $output = null;
-        $result_code = null;
-        exec($command, $output, $result_code);
+        foreach ($tables as $table) {
+            $tableArray = get_object_vars($table);
+            $tableName = reset($tableArray);
 
-        if ($result_code !== 0) {
-            $this->error('Database backup failed. Please check the command and credentials.');
-            return;
+            // Get create statement for each table
+            $createTable = DB::select("SHOW CREATE TABLE $tableName");
+            $createStatement = $createTable[0]->{'Create Table'} . ";\n\n";
+            $backupSql .= $createStatement;
+
+            // Get table data
+            $rows = DB::table($tableName)->get();
+
+            foreach ($rows as $row) {
+                $rowArray = (array) $row;
+                $columns = implode('`, `', array_keys($rowArray));
+                $values = implode("', '", array_map('addslashes', array_values($rowArray)));
+                $backupSql .= "INSERT INTO `$tableName` (`$columns`) VALUES ('$values');\n";
+            }
+
+            $backupSql .= "\n\n";
         }
+
+        // Store the backup in the storage path
+        $backupFilePath = 'backups/'.'backup-' . Carbon::now()->format('Y-m-d') . '.sql';
+        Storage::put($backupFilePath, $backupSql);
 
         $this->sendBackupEmail($filename, $path);
 
         // Delete the backup file after sending
-        //unlink($path);
+        unlink($path);
 
         $this->info('Database backup completed and sent via email.');
     }
 
     private function sendBackupEmail($filename, $path)
     {
-        $toEmail = 'rajvadi68@gmail.com'; // Update to the recipient's email
+        $toEmail = ['rajvadi68@gmail.com','vrajeshsavaliya98@gmail.com'];
         Mail::raw('Database backup attached.', function ($message) use ($toEmail, $filename, $path) {
             $message->to($toEmail)
                 ->subject('Database Backup')

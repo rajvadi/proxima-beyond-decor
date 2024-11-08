@@ -118,10 +118,10 @@ document.getElementById("product_form").addEventListener("submit", function(e) {
     });
 
     // if no image is uploaded, give error message
-    if (dropzone.getAcceptedFiles().length == 0) {
+    /*if (dropzone.getAcceptedFiles().length == 0) {
         alert("Please upload at least one image.");
         return;
-    }
+    }*/
 
     // Disable the submit button to prevent multiple submissions
     var submitButton = $(this).find('button[type="submit"]');

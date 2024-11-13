@@ -13,6 +13,27 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('FE/assets/img/logo/favicon.ico') }}">
     @include('frontend.layouts.css')
+    <style>
+        #product-list {
+            float: left;
+            list-style: none;
+            margin-top: -3px;
+            padding: 0;
+            width: 71%;
+            position: absolute;
+        }
+
+        #product-list li {
+            padding: 10px;
+            background: #f0f0f0;
+            border-bottom: #bbb9b9 1px solid;
+        }
+
+        #product-list li:hover {
+            background: #ece3d2;
+            cursor: pointer;
+        }
+    </style>
     @yield('style')
 </head>
 <body class="body-bg-6">
@@ -33,6 +54,39 @@
         </div>
     </a>
     @include('frontend.layouts.script')
+    <script>
+        $(document).ready(function() {
+            $("#pcode").keyup(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('product.code.search') }}",
+                    data: 'keyword=' + $(this).val() + '&cid=' + $("#cid").val(),
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    beforeSend: function() {
+                        $("#pcode").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
+                    },
+                    success: function(data) {
+                        $("#suggesstion-box").show();
+                        $("#suggesstion-box").html(data);
+                        $("#pcode").css("background", "#FFF");
+                    }
+                });
+            });
+        });
+        function selectProduct(val) {
+            $("#pcode").val(val);
+            $("#suggesstion-box").hide();
+            // submit the form
+            $("#product_search").submit();
+        }
+        
+        // onclick of anywhere in the page hide the product list
+        $(document).on('click', function() {
+            $("#suggesstion-box").hide();
+        });
+    </script>
     @yield('script')
 </body>
 </html>

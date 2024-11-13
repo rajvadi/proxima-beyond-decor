@@ -23,6 +23,8 @@ Route::get('search', [ProductController::class, 'search'])->name('search');
 
 Route::get('product/{product}', [ProductController::class, 'show'])->name('product.show');
 
+Route::post('product/code/search', [ProductController::class, 'searchCode'])->name('product.code.search');
+
 Route::get('/run-db-backup', function () {
     // Run the backup command
     Artisan::call('backup:database');

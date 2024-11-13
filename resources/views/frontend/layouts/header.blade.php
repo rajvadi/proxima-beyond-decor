@@ -8,10 +8,11 @@
                         <img src="{{ asset('FE/assets/img/logo/logo-light.svg') }}" style="margin-right: 10px;" alt="logo" >
                         <img src="{{ asset('FE/assets/img/logo/logo.png') }}" alt="logo" class="logo">
                     </a>
-                    <form class="cr-search" action="{{ route('search') }}">
+                    <form class="cr-search" id="product_search" action="{{ route('search') }}">
                         @csrf
-                        <input class="search-input" value="{{ isset(request()->pcode) ? request()->pcode : ''  }}" name="pcode" type="text" placeholder="Search For products...">
-                        <select class="form-select" name="cid" aria-label="Default select example">
+                        <input class="search-input" value="{{ isset(request()->pcode) ? request()->pcode : ''  }}" name="pcode" id="pcode" type="text" placeholder="Search For products...">
+                        <div id="suggesstion-box"></div>
+                        <select class="form-select" name="cid" id="cid" aria-label="Default select example">
                             <option value="" selected>All Categories</option>
                             @foreach(\App\Models\Category::all() as $category)
                                 <option value="{{ $category->id }}" {{ isset(request()->cid) && request()->cid == $category->id ? 'selected' : ''  }}>{{ $category->name }}</option>

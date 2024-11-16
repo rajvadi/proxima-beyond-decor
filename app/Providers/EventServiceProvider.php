@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        \Spatie\Backup\Events\BackupWasSuccessful::class => [
+            \App\Listeners\SendDatabaseBackupNotification::class,
+        ],
     ];
 
     /**

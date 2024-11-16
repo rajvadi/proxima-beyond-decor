@@ -26,14 +26,22 @@ Route::get('product/{product}', [ProductController::class, 'show'])->name('produ
 Route::post('product/code/search', [ProductController::class, 'searchCode'])->name('product.code.search');
 
 Route::get('/run-db-backup', function () {
-    // Run the backup command
-    Artisan::call('backup:database');
+    // Clear the configuration and event cache
+    Artisan::call('config:clear');
+    Artisan::call('event:clear');
 
-    // Optionally, capture the output and return it
+    // Optionally, recache config and events
+    Artisan::call('config:cache');
+    Artisan::call('event:cache');
+
+    // Run Spatie's backup command for database only
+    Artisan::call('backup:run', ['--only-db' => true]);
+
+    // Capture the output of the backup command
     $output = Artisan::output();
 
     return response()->json([
-        'message' => 'Backup command executed.',
+        'message' => 'Database backup command executed.',
         'output' => $output,
     ]);
 });

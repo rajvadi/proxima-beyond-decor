@@ -401,7 +401,7 @@
                         // Handle success, close the modal, and show a success message
                         $('#editproductinfo').modal('hide');
                         Swal.fire('Success', 'Product updated successfully', 'success');
-                        $('#product-list').DataTable().ajax.reload(); // Optionally, refresh part of the page with updated data
+                        $('#product-list').DataTable().ajax.reload(null, false); // Optionally, refresh part of the page with updated data
                         // Optionally, refresh part of the page with updated data
                     } else {
                         // Handle error

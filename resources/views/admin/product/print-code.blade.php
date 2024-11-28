@@ -111,7 +111,7 @@
     
     <script>
         $(document).ready(function () {
-            
+            let products = @json($products);
             // select 2
             $('.form-select').select2();
             
@@ -124,29 +124,31 @@
                     <div class="row mb-3 product-row">
                         <div class="col-md-6">
                             <select name="product[]" class="form-select" required>
-                                <option value="">Select Product</option>
-                                @foreach($products as $product)
-                                    <option value="{{ $product->id }}">{{ $product->code.' - '.$product->name }}</option>
-                                @endforeach
+                                <option value="">Select Product</option>`;
+                                products.forEach(product => {
+                                    newRow += `<option value="${product.id}">${product.code} - ${product.name}</option>`;
+                                });
+                                newRow += `
                             </select>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="number" name="qty[]" class="form-control" min="1" required>
-                    </div>
-                    <div class="col-md-1">
-                        <div class="mt-3">
-                            <input class="form-check-input" checked type="radio" name="is_product_name[${rowIndex}]" id="price_per1_${rowIndex}" value="1">
-                            <label class="form-check-label me-2" for="price_per1_${rowIndex}">Yes</label>
-                            <input class="form-check-input" type="radio" name="is_product_name[${rowIndex}]" id="price_per2_${rowIndex}" value="0">
-                            <label class="form-check-label" for="price_per2_${rowIndex}">No</label>
                         </div>
-                    </div>
-                    <div class="col-md-2 d-flex align-items-end">
-                        <button type="button" class="btn btn-danger remove-row">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </div>
-                </div>`;
+                        <div class="col-md-2">
+                            <input type="number" name="qty[]" class="form-control" min="1" required>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="mt-3">
+                                <input class="form-check-input" checked type="radio" name="is_product_name[${rowIndex}]" id="price_per1_${rowIndex}" value="1">
+                                <label class="form-check-label me-2" for="price_per1_${rowIndex}">Yes</label>
+                                <input class="form-check-input" type="radio" name="is_product_name[${rowIndex}]" id="price_per2_${rowIndex}" value="0">
+                                <label class="form-check-label" for="price_per2_${rowIndex}">No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="button" class="btn btn-danger remove-row">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>`;
+
 
                 formRows.append(newRow);
                 rowIndex++; // Increment row index to ensure unique IDs

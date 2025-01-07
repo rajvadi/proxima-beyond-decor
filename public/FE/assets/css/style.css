@@ -2297,6 +2297,14 @@ ul.navbar-nav .dropdown:hover .dropdown-menu {
   background-position: center;
 }
 
+.cr-banner-image-four {
+  width: 100%;
+  background-image: url("../img/banner/banner-4.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 .cr-left-side-contain {
   max-width: 550px;
   height: 80vh;

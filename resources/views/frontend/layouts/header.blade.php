@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <div class="top-header">
                     <a href="{{ route('home') }}" class="cr-logo d-flex">
-                        <img src="{{ asset('FE/assets/img/logo/logo-light.svg') }}" style="margin-right: 10px;" alt="logo" >
+                        <img src="{{ asset('FE/assets/img/logo/logo-light.svg') }}" class="slogo" style="margin-right: 10px;" alt="logo" >
                         <img src="{{ asset('FE/assets/img/logo/logo.png') }}" alt="logo" class="logo">
                     </a>
                     <form class="cr-search" id="product_search" action="{{ route('search') }}">

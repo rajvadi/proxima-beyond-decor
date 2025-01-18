@@ -9400,3 +9400,23 @@ iframe {
   }
 }
 /*# sourceMappingURL=style.css.map */
+
+/* Styles for tablets (screens between 768px and 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .slogo {
+    width: 30px;
+  }
+}
+
+/* Styles for mobile devices (screens less than 768px) */
+@media screen and (max-width: 767px) {
+  .slogo {
+    width: 30px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+     .slogo {
+      width: 30px !important;
+    }
+  }
